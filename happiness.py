@@ -20,25 +20,11 @@ while True:
         else:
             break
 
-# Ask for integer input for set N and checks it is correct length
-while True:
-    try:
-        set_n = list(map(int, input("Enter {} integers for set N: ".format(n)).split()))
-    except ValueError:
-        print("Sorry you have not entered integers")
-    else:
-        if len(set_n) != n:
-            print("Sorry you need to enter {} integers".format(n))
-        elif not all(1 <= i <= 100 for i in set_n):
-            print("Sorry, you have entered numbers outside of range 1-100")
-        else:
-            break
-
-# Ask for integer input for set A and B and checks it is correct length and within range
+# Ask for integer input for sets N, A and B and checks they are correct length and within range
 
 sets_dict = {}
 sets = []
-for letter in ["a", "b"]:
+for letter in ["n", "a", "b"]:
     while True:
         try:
             sets_dict["set_%s" % letter] = \
@@ -58,5 +44,5 @@ for letter in ["a", "b"]:
 
 # Checks if and member of A is in N and adds one to happiness if so, and takes
 # off one if B is in N
-happiness = sum([(i in sets[0]) - (i in sets[1]) for i in set_n])
+happiness = sum([(i in sets[1]) - (i in sets[2]) for i in sets[0]])
 print(happiness)
