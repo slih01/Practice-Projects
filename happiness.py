@@ -34,38 +34,29 @@ while True:
         else:
             break
 
-# Ask for integer input for set A and checks it is correct length
-while True:
-    try:
-        set_a = list(map(int, set(input("Enter {} unique integers for set A: "
-                                        .format(m)).split())))
-    except ValueError:
-        print("Sorry you have not entered integers")
-    else:
-        if len(set_a) != m:
-            print("Sorry you need to enter {} unique integers".format(m))
-        elif not all(1 <= i <= 100 for i in set_a):
-            print("Sorry, you have entered numbers outside of range 1-100")
-        else:
-            break
+# Ask for integer input for set A and B and checks it is correct length and within range
 
-# Ask for integer input for set B and checks it is correct length
-while True:
-    try:
-        set_b = list(map(int, set(input("Enter {} unique integers for set B: "
-                                        .format(m)).split())))
-    except ValueError:
-        print("Sorry you have not entered integers")
-    else:
-        if len(set_b) != m:
-            print("Sorry you need to enter {} unique integers".format(m))
-        elif not all(1 <= i <= 100 for i in set_b):
-            print("Sorry, you have entered numbers outside of range 1-100")
+sets_dict = {}
+sets = []
+for letter in ["a", "b"]:
+    while True:
+        try:
+            sets_dict["set_%s" % letter] = \
+                list(map(int, set(input("Enter {} unique integers for set {}: "
+                                        .format(m, letter.capitalize())).split())))
+        except ValueError:
+            print("Sorry you have not entered integers")
         else:
-            break
+            if len(sets_dict["set_%s" % letter]) != m:
+                print("Sorry you need to enter {} unique integers".format(m))
+            elif not all(1 <= i <= 100 for i in sets_dict["set_%s" % letter]):
+                print("Sorry, you have entered numbers outside of range 1-100")
+            else:
+                sets.append(sets_dict["set_%s" % letter])
+                break
+
 
 # Checks if and member of A is in N and adds one to happiness if so, and takes
 # off one if B is in N
-happiness = sum([(i in set_a) - (i in set_b) for i in set_n])
-
+happiness = sum([(i in sets[0]) - (i in sets[1]) for i in set_n])
 print(happiness)
