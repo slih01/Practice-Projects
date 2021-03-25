@@ -1,6 +1,9 @@
 # Simple programme that adds 1 to happiness for each member of set A in
 # array N and takes off 1 for each B in N
 
+print("Hi. Please enter inputs when asked. Please note that the size of the sets "
+      "should not be bigger that 10 and the positive integers within the sets "
+      "should not be higher than 100 ")
 
 # Requests from user number of integers for set n and m.
 while True:
@@ -8,10 +11,14 @@ while True:
         n, m = map(int, input("Enter the number of integers you want in set N, "
                               "and number of integers in sets A & B separated by "
                               "a space: ").split())
+        inputs = [n, m]
     except ValueError:
         print("Sorry you have not entered two integers separated by a space")
     else:
-        break
+        if not all(1 <= i <= 10 for i in inputs):
+            print("Sorry your numbers are not within range from 1-10")
+        else:
+            break
 
 # Ask for integer input for set N and checks it is correct length
 while True:
@@ -22,6 +29,8 @@ while True:
     else:
         if len(set_n) != n:
             print("Sorry you need to enter {} integers".format(n))
+        elif not all(1 <= i <= 100 for i in set_n):
+            print("Sorry, you have entered numbers outside of range 1-100")
         else:
             break
 
@@ -35,6 +44,8 @@ while True:
     else:
         if len(set_a) != m:
             print("Sorry you need to enter {} unique integers".format(m))
+        elif not all(1 <= i <= 100 for i in set_a):
+            print("Sorry, you have entered numbers outside of range 1-100")
         else:
             break
 
@@ -48,6 +59,8 @@ while True:
     else:
         if len(set_b) != m:
             print("Sorry you need to enter {} unique integers".format(m))
+        elif not all(1 <= i <= 100 for i in set_b):
+            print("Sorry, you have entered numbers outside of range 1-100")
         else:
             break
 
